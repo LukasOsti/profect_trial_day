@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class StationServiceService {
 
-  private stationUrl: string = 'http://localhost:8080';
+  public stationUrl: string = 'http://localhost:8080';
 
   public async findStations(): Promise<string[]> {
     const data = await fetch(this.stationUrl + "/stations");

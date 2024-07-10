@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject, isDevMode } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {CommonModule} from '@angular/common';
 import { StationServiceService } from './station-service.service';
@@ -35,7 +35,18 @@ import { StationServiceService } from './station-service.service';
   `,
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  ngOnInit() {
+    if (isDevMode()) {
+      console.log('Development!');
+      this.stationService.stationUrl = "http://localhost:8080"
+    } else {
+      console.log('Production!');
+      this.stationService.stationUrl = "http://host.docker.internal:8080"
+    }
+  }
+
   title = 'ang-frontend';
   stationList: string[] = [];
   stationService: StationServiceService = inject(StationServiceService);
