@@ -12,6 +12,9 @@ import java.util.Arrays;
 public class SpringbackendApplication {
 
     public static void main(String[] args) {
+		if (args.length > 0){
+			StationHandler.url = "http://" + args[0];
+		}
         SpringApplication.run(SpringbackendApplication.class, args);
     }
 
