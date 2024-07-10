@@ -18,23 +18,21 @@ public class StationController {
 
     @GetMapping("/stations")
     @ResponseBody
-    public ResponseList sortedStations(){
-        return new ResponseList(StationHandler.getStationsFromApi());
+    public List<String> sortedStations(){
+        return StationHandler.getStationsFromApi();
     }
 
 
     @GetMapping("/lines/station")
     @ResponseBody
-    public ResponseList sortedBusLines(@RequestParam(required = false) String station){
-        return new ResponseList(new ArrayList<>());
+    public List<String> sortedBusLines(@RequestParam(required = false) String station){
+        return StationHandler.getBusLinesFromApi(station);
     }
 
 
     @PostMapping(path = "/times", consumes = "application/json")
     @ResponseBody
-    public ResponseList timings(@RequestBody RequestStationAndBusBody requestStationAndBusBody){
-        System.out.println(requestStationAndBusBody);
-
-        return new ResponseList(new ArrayList<>());
+    public List<String> timings(@RequestBody RequestStationAndBusBody requestStationAndBusBody){
+        return StationHandler.getTimingsFromApi(requestStationAndBusBody.getStation(), requestStationAndBusBody.getBusLine());
     }
 }
