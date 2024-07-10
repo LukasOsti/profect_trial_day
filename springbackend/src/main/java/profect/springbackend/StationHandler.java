@@ -63,7 +63,6 @@ public class StationHandler {
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             var responseBody = response.body();
-            System.out.println(responseBody);
             var arr = new JSONArray(responseBody);// notice that `"posts": [...]`
             for (int i = 0; i < arr.length(); i++)
             {
@@ -93,14 +92,13 @@ public class StationHandler {
 
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
             var responseBody = response.body();
-            System.out.println(responseBody);
             var arr = new JSONArray(responseBody);
             for (int i = 0; i < arr.length(); i++)
             {
                 String name = arr.getJSONObject(i).getString("name");
                 if (name.equals(busLine)){
                     var arrZeiten = arr.getJSONObject(i).getJSONArray("zeiten");
-                    for (int j = 0; j < arrZeiten.length(); i++)
+                    for (int j = 0; j < arrZeiten.length(); j++)
                     {
                         list.add(arrZeiten.getString(j));
                     }
